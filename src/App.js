@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import axios from 'axios';
+
 import './App.css';
+
 import ControlPanel from "./control-panel/ControlPanel";
 import FileZone from "./file-zone/FileZone";
 import getMockText from './text.service';
-
-import axios from 'axios';
 
 class App extends Component {
     constructor(props) {
@@ -16,11 +17,7 @@ class App extends Component {
         synonyms: []
       }
     }
-    //getText() {
-    //    getMockText().then(function (result) {
-    //        console.log(result);
-    //    });
-    //}
+    
     findSynonym = (word) => {
       axios.get('https://api.datamuse.com/words?ml=' + word)
         .then(response => {
@@ -56,6 +53,30 @@ class App extends Component {
         clickedElement: choosenElement
       });
     }
+	
+	handleChangeText = (text) => {
+		const choosenElement = {...this.state.clickedElement};
+		choosenElement.text = text;
+		
+		const newList = [...this.state.notesList];
+        newList[this.state.selectedIndx] = choosenElement
+		this.setState({
+		  notesList: newList,
+		  clickedElement: choosenElement
+		});
+	}
+	
+	handlePickColor = (color) => {
+	  const choosenElement = {...this.state.clickedElement};
+	  choosenElement.textColor = color;
+	  
+	  const newList = [...this.state.notesList];
+      newList[this.state.selectedIndx] = choosenElement;
+	  this.setState({
+        notesList: newList,
+        clickedElement: choosenElement
+      });
+    }
 
     handleTextSubmit = (notesList) => {
       this.setState({
@@ -65,7 +86,7 @@ class App extends Component {
 
     handleDoubleClick = (listId) => {
       const newList = [...this.state.notesList];
-      const elementIndex = newList.map(list => list.text).indexOf(listId);
+      const elementIndex = newList.map(list => list.id).indexOf(listId);
       const newUpdates = newList[elementIndex];
       this.setState({clickedElement: newUpdates, selectedIndx: elementIndex});
     }
@@ -87,7 +108,12 @@ class App extends Component {
                       onHandleTextSubmit={this.handleTextSubmit}
                       onHandleDoubleClick={this.handleDoubleClick}
                       notesList={this.state.notesList}
-                      synonyms={this.state.synonyms} />
+                      synonyms={this.state.synonyms}
+					  showPalette={this.state.clickedElement.text ? true : false}
+					  shosenColor={this.state.clickedElement.textColor}
+					  onHandlePickColor={this.handlePickColor}
+					  onHandleChangeText={this.handleChangeText}
+					/>
                 </main>
             </div>
         );

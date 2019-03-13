@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './TextEditor.css';
+
 class TextEditor extends Component {
   constructor(props) {
     super(props);
@@ -9,13 +11,21 @@ class TextEditor extends Component {
     }
   }
 
-  handleNoteChange = (e) => {
+  handleTextChange = (e) => {
     const separatedText = e.target.value.split(' ').map(text => {
+	  const getRandomInt = (min, max) => {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	  };
+	  
       return {
         text: text,
         bold: false,
         italic: false,
-        underline: false
+        underline: false,
+		textColor: '#000000',
+		id: getRandomInt(100000, 1000000)
       }
     });
 
@@ -26,7 +36,6 @@ class TextEditor extends Component {
   }
 
   handleSubmit = (notesList) => {
-
     this.props.onHandleSubmit(notesList);
     this.resetState();
   }
@@ -40,14 +49,13 @@ class TextEditor extends Component {
 
   render() {
     return (
-      <div>
-        <h3>TextEditor light</h3>
+      <div className='editor'>
         <textarea
           rows={5}
           cols={80}
           placeholder="Type something here..."
           className="editor__textarea"
-          onChange={this.handleNoteChange}
+          onChange={this.handleTextChange}
           value={this.state.text ? this.state.text : ''}
         />
         <button
@@ -55,7 +63,7 @@ class TextEditor extends Component {
           onClick={() => this.handleSubmit(this.state.textInput)}
         >Add</button>
       </div>
-    )
+    );
   }
 }
 

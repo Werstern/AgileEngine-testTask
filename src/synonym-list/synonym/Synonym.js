@@ -2,9 +2,12 @@ import React from 'react';
 
 const synonym = (props) => {
   return (
-    <li
-      key={props.word}
-      id={props.word}>{props.word}</li>
+    <li id={props.word}
+		onDoubleClick={props.onHandleChangeText}>
+		<div>
+			{props.word}
+		</div>
+	</li>
   );
 }
 

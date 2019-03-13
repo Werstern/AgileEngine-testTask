@@ -1,0 +1,9 @@
+.notesgrid__container {
+  width: 460px;
+  margin: 16px auto;
+  align-items: center;
+}
+
+.synonyms_header {
+	text-align: center;
+}

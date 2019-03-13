@@ -1,4 +1,7 @@
 import React from 'react';
+
+import './SynonymList.css';
+
 import Synonym from './synonym/Synonym.js';
 
 const synonymList = (props) => {
@@ -6,10 +9,21 @@ const synonymList = (props) => {
   if (props.synonyms.length !== 0) {
     synonyms = (
       <React.Fragment>
-        <h4>Synonyms List</h4>
-        <ul>
+        <h4 className="synonyms_header">Synonyms List</h4>
+        <ul className="notesgrid__container">
           {props.synonyms.map(synonym => {
-            return <Synonym word={synonym} />
+			const getRandomInt = (min, max) => {
+			  min = Math.ceil(min);
+			  max = Math.floor(max);
+			  return Math.floor(Math.random() * (max - min + 1)) + min;
+			};
+			const random = getRandomInt(100000, 1000000);
+            return (
+			  <Synonym 
+				key={random} 
+				word={synonym}
+				onHandleChangeText={() => props.onHandleChangeText(synonym)}/>
+			)
           })}
         </ul>
       </React.Fragment>
