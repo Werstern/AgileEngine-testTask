@@ -1,0 +1,8 @@
+.activeWord {
+  color: #B384FF
+}
+
+ul li.Synonym {
+  display: inline-block;
+  margin-left: 15px;
+}

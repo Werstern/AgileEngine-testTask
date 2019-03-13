@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.color-picker_header {
+  text-align: center;
+}
+
 .color-picker__color {
   width: 28px;
   height: 28px;

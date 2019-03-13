@@ -5,6 +5,7 @@ import './TextEditor.css';
 class TextEditor extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       textInput: [],
       text: ''
@@ -13,19 +14,19 @@ class TextEditor extends Component {
 
   handleTextChange = (e) => {
     const separatedText = e.target.value.split(' ').map(text => {
-	  const getRandomInt = (min, max) => {
-		min = Math.ceil(min);
-		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	  };
-	  
+  	  const getRandomInt = (min, max) => {
+    		min = Math.ceil(min);
+    		max = Math.floor(max);
+    		return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+
       return {
         text: text,
         bold: false,
         italic: false,
         underline: false,
-		textColor: '#000000',
-		id: getRandomInt(100000, 1000000)
+    		textColor: '#000000',
+    		id: getRandomInt(100000, 1000000)
       }
     });
 
@@ -35,8 +36,8 @@ class TextEditor extends Component {
     });
   }
 
-  handleSubmit = (notesList) => {
-    this.props.onHandleSubmit(notesList);
+  handleSubmit = (wordList) => {
+    this.props.onHandleSubmit(wordList);
     this.resetState();
   }
 

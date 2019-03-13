@@ -7,14 +7,16 @@ const itemList = (props) => {
     'fontWeight': props.bold ? 'bold' : 'normal',
     'textDecoration': props.underline ? 'underline' : 'none',
     'fontStyle': props.italic ? 'italic' : 'normal',
-	'color': props.textColor
+    'color': props.textColor
   };
 
   return (
     <li
+      className="itemList"
       style={elemStyle}
-      onDoubleClick={props.onHandleDoubleClick}>{props.text} 
-	</li>
+      onDoubleClick={props.onHandleDoubleClick}>
+      {props.text}
+    </li>
   );
 }
 
