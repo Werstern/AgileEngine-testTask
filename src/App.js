@@ -5,7 +5,6 @@ import './App.css';
 
 import ControlPanel from "./components/control-panel/ControlPanel";
 import FileZone from "./components/file-zone/FileZone";
-import getMockText from './text.service';
 
 class App extends Component {
   constructor(props) {
